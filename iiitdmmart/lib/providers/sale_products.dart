@@ -29,13 +29,13 @@ class SaleProducts with ChangeNotifier {
     return [..._saleProducts];
   }
 
-  Future<void> fetchAndSetProducts() {
-    //Todo - fetch products from firebase and show in the main screen
+  // Future<void> fetchAndSetProducts() {
+  //   //Todo - fetch products from firebase and show in the main screen
     
-  }
+  // }
 
-  Future<void> addProduct(SaleProduct saleProduct) {
-    //Todo - add product to firebase
-  }
+  // Future<void> addProduct(SaleProduct saleProduct) {
+  //   //Todo - add product to firebase
+  // }
 }
 

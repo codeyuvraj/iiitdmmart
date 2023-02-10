@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iiitdmmart/screens/homescreen/homescreen.dart';
+
+import 'package:iiitdmmart/providers/auth.dart';
+import 'package:iiitdmmart/screens/loginscreen/login.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,15 +18,40 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-    );
+    // var authdata = Provider.of<Auth>(context);
+    return MultiProvider(providers: [
+      ChangeNotifierProvider.value(value: Auth())
+    ],
+     child: Consumer<Auth>(
+       
+       builder: (ctx, auth, _) => MaterialApp(
+        title: 'College',
+        initialRoute: AuthScreen.routeName,
+        // home: AuthScreen(),
+        routes: {
+          AuthScreen.routeName:(context) => AuthScreen(),
+          'home':(context) => MyHomePage()
+        },
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        
+         ),
+     ));
   }
 }
+
+// class MyHomePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     return Scaffold(appBar: AppBar(title: Text('homepage')),
+//     body: Center(child: Text('homepage'),),
+//     );
+//   }
+// }
+
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -112,3 +142,12 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+        
+//         primarySwatch: Colors.blue,
+//       ),
+//       // home: const MyHomePage(title: 'College'),
+//     ));
+//   }
+// }
+
