@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iiitdmmart/providers/sale_products.dart';
+import 'package:iiitdmmart/screens/addproduct/addproduct.dart';
 import 'package:iiitdmmart/screens/homescreen/homescreen.dart';
 
 import 'package:iiitdmmart/providers/auth.dart';
 import 'package:iiitdmmart/screens/loginscreen/login.dart';
-import 'package:iiitdmmart/screens/productscreen/productScreen.dart';
+import 'package:iiitdmmart/screens/requestscreen/uploadscreen.dart';
+import 'package:iiitdmmart/screens/settings/settings.dart';
 import 'package:provider/provider.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
             initialRoute: AuthScreen.routeName,
             // home: AuthScreen(),
             routes: {
-              "home": (context) =>  const MyHomePage(),
+              'homescreen': (context) =>  const MyHomePage(),
               AuthScreen.routeName: (context) => AuthScreen(),
             },
           ),
@@ -64,7 +65,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex =0 ;
-  final List<Widget> pages =[const HomeScreen(),const HomeScreen(),const UploadScreen(),const HomeScreen()];
+  final List<Widget> pages =[const HomeScreen(),const AddProduct(),const UploadScreen(),const SettingsPage()];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -129,12 +130,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-//         primarySwatch: Colors.blue,
-//       ),
-//       // home: const MyHomePage(title: 'College'),
-//     ));
-//   }
-// }
 

@@ -4,6 +4,7 @@ import 'package:iiitdmmart/providers/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:iiitdmmart/models/http_exception.dart';
 import 'package:lottie/lottie.dart';
+
 enum AuthMode { Signup, Login }
 
 class AuthScreen extends StatelessWidget {
@@ -39,8 +40,8 @@ class AuthScreen extends StatelessWidget {
                         children: [
                           Container(
                             //margin: const EdgeInsets.only(bottom: 70.0),
-                            padding:
-                            const EdgeInsets.symmetric(vertical: 20.0, horizontal: 70.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20.0, horizontal: 70.0),
                             child: const Text(
                               'VenDork',
                               style: TextStyle(
@@ -52,9 +53,9 @@ class AuthScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: 320,
-                              child: Lottie.asset('assets/lock.json',fit: BoxFit.fill)
-                          ),
+                              height: 320,
+                              child: Lottie.asset('assets/lock.json',
+                                  fit: BoxFit.fill)),
                         ],
                       ),
                     ),
@@ -96,17 +97,17 @@ class _AuthCardState extends State<AuthCard> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-            title: const Text('An Error Occurred!'),
-            content: Text(message),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Okay'),
-                onPressed: () {
-                  Navigator.of(ctx).pop();
-                },
-              )
-            ],
-          ),
+        title: const Text('An Error Occurred!'),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Okay'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          )
+        ],
+      ),
     );
   }
 
@@ -128,14 +129,22 @@ class _AuthCardState extends State<AuthCard> {
           _authData['password'] as String,
         );
         print('login done');
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(),));
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MyHomePage(),
+            ));
       } else {
         // Sign user up
         await Provider.of<Auth>(context, listen: false).signup(
           _authData['email'] as String,
           _authData['password'] as String,
         );
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(),));
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MyHomePage(),
+            ));
       }
     } on HttpException catch (error) {
       var errorMessage = 'Authentication failed';
@@ -161,7 +170,6 @@ class _AuthCardState extends State<AuthCard> {
       _isLoading = false;
     });
 
-    
     //Navigator.pushReplacementNamed(context, "/");
   }
 
@@ -230,7 +238,8 @@ class _AuthCardState extends State<AuthCard> {
                 if (_authMode == AuthMode.Signup)
                   TextFormField(
                     enabled: _authMode == AuthMode.Signup,
-                    decoration: const InputDecoration(labelText: 'Confirm Password'),
+                    decoration:
+                        const InputDecoration(labelText: 'Confirm Password'),
                     obscureText: true,
                     validator: _authMode == AuthMode.Signup
                         ? (value) {
@@ -240,23 +249,31 @@ class _AuthCardState extends State<AuthCard> {
                           }
                         : null,
                   ),
-                const SizedBox(height: 30,),
+                const SizedBox(
+                  height: 30,
+                ),
                 if (_isLoading)
                   const CircularProgressIndicator()
                 else
                   ElevatedButton(
-                    child:
-                        Text(_authMode == AuthMode.Login ? 'Login' : 'Sign Up',style: const TextStyle(
-                          fontSize: 18,fontWeight: FontWeight.w400,
-                        ),),
+                    child: Text(
+                      _authMode == AuthMode.Login ? 'Login' : 'Sign Up',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                     onPressed: () => _submit(context),
                   ),
                 TextButton(
                   onPressed: _switchAuthMode,
                   child: Text(
-                      '${_authMode == AuthMode.Login ? 'New User? SIGNUP' : 'LOGIN'} ',style: const TextStyle(
-                    fontSize: 15,fontWeight: FontWeight.normal,
-                  ),),
+                    '${_authMode == AuthMode.Login ? 'New User? SIGNUP' : 'LOGIN'} ',
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
                 ),
               ],
             ),
