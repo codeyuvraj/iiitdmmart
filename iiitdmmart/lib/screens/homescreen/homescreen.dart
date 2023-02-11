@@ -1,40 +1,30 @@
 import 'package:flutter/material.dart';
-
+import 'package:iiitdmmart/screens/homescreen/productview.dart';
+import 'package:velocity_x/velocity_x.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return Container(
-          padding: EdgeInsets.all(8),
-          child: Card(
-            elevation: 5,
-            margin: const EdgeInsets.all(3),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            color: Colors.white,
-            child: GridTile(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.network("https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"),
-                    Card(
-                      child: Row(
-                        children: const [
-                          Text("Calculator"),
-                          Text("\$100"),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-            ),
-          ),
-        );
-      },
+    return MaterialApp(
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark().copyWith(
+        appBarTheme: const AppBarTheme(color: Color(0xFF253341)),
+        scaffoldBackgroundColor: const Color(0xFF15202B),
+      ),
+      themeMode: ThemeMode.dark,
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          toolbarHeight: 45,
+          leading: IconButton(onPressed: (){},icon: const Icon(Icons.help_outline_sharp)),
+          actions: [
+            IconButton(onPressed: (){}, icon: const Icon(Icons.search_rounded)),
+          ],
+          title: "VenDork".text.bold.make(),
+        ),
+        body: const ProductView(),
+      ),
     );
   }
 }

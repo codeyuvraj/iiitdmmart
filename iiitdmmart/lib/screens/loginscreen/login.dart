@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:iiitdmmart/main.dart';
 import 'package:iiitdmmart/providers/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:iiitdmmart/models/http_exception.dart';
-
+import 'package:lottie/lottie.dart';
 enum AuthMode { Signup, Login }
 
 class AuthScreen extends StatelessWidget {
@@ -15,70 +14,60 @@ class AuthScreen extends StatelessWidget {
     final deviceSize = MediaQuery.of(context).size;
     // final transformConfig = Matrix4.rotationZ(-8 * pi / 180);
     // transformConfig.translate(-10.0);
-    return Scaffold(
-      // resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
-                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0, 1],
-              ),
-            ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              height: deviceSize.height,
-              width: deviceSize.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Flexible(
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 20.0),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 8.0, horizontal: 94.0),
-                      transform: Matrix4.rotationZ(-8 * pi / 180)
-                        ..translate(-10.0),
-                      // ..translate(-10.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.deepOrange.shade900,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 8,
-                            color: Colors.black26,
-                            offset: Offset(0, 2),
-                          )
+    return MaterialApp(
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark().copyWith(
+        appBarTheme: const AppBarTheme(color: Color(0xFF253341)),
+        scaffoldBackgroundColor: const Color(0xFF15202B),
+      ),
+      themeMode: ThemeMode.dark,
+      home: Scaffold(
+        // resizeToAvoidBottomInset: false,
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: SizedBox(
+                height: deviceSize.height,
+                width: deviceSize.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            //margin: const EdgeInsets.only(bottom: 70.0),
+                            padding:
+                            const EdgeInsets.symmetric(vertical: 20.0, horizontal: 70.0),
+                            child: const Text(
+                              'VenDork',
+                              style: TextStyle(
+                                // color: Theme.of(context).accentTextTheme.title.color,
+                                fontSize: 50,
+                                fontFamily: 'Anton',
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 320,
+                              child: Lottie.asset('assets/lock.json',fit: BoxFit.fill)
+                          ),
                         ],
                       ),
-                      child: Text(
-                        'IIITDM',
-                        style: TextStyle(
-                          // color: Theme.of(context).accentTextTheme.title.color,
-                          fontSize: 50,
-                          fontFamily: 'Anton',
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
                     ),
-                  ),
-                  Flexible(
-                    flex: deviceSize.width > 600 ? 2 : 1,
-                    child: AuthCard(),
-                  ),
-                ],
+                    Flexible(
+                      flex: deviceSize.width > 600 ? 2 : 1,
+                      child: const AuthCard(),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -96,7 +85,7 @@ class AuthCard extends StatefulWidget {
 class _AuthCardState extends State<AuthCard> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   AuthMode _authMode = AuthMode.Login;
-  Map<String, String> _authData = {
+  final Map<String, String> _authData = {
     'email': '',
     'password': '',
   };
@@ -107,11 +96,11 @@ class _AuthCardState extends State<AuthCard> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-            title: Text('An Error Occurred!'),
+            title: const Text('An Error Occurred!'),
             content: Text(message),
             actions: <Widget>[
               TextButton(
-                child: Text('Okay'),
+                child: const Text('Okay'),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                 },
@@ -168,7 +157,8 @@ class _AuthCardState extends State<AuthCard> {
       _isLoading = false;
     });
 
-    Navigator.of(context).pushReplacementNamed('home');
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(),));
+    //Navigator.pushReplacementNamed(context, "/");
   }
 
   void _switchAuthMode() {
@@ -192,46 +182,51 @@ class _AuthCardState extends State<AuthCard> {
       ),
       elevation: 8.0,
       child: Container(
-        height: _authMode == AuthMode.Signup ? 320 : 260,
+        height: _authMode == AuthMode.Signup ? 320 : 320,
         constraints:
-            BoxConstraints(minHeight: _authMode == AuthMode.Signup ? 320 : 260),
-        width: deviceSize.width * 0.75,
-        padding: EdgeInsets.all(16.0),
+            BoxConstraints(minHeight: _authMode == AuthMode.Signup ? 320 : 320),
+        width: deviceSize.width * 0.80,
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
             child: Column(
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'E-Mail'),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value!.isEmpty || !value.contains('@')) {
-                      return 'Invalid email!';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _authData['email'] = value as String;
-                  },
-                ),
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'Password'),
-                  obscureText: true,
-                  controller: _passwordController,
-                  validator: (value) {
-                    if (value!.isEmpty || value.length < 5) {
-                      return 'Password is too short!';
-                    }
-                  },
-                  onSaved: (value) {
-                    _authData['password'] = value as String;
-                  },
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'E-Mail'),
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value!.isEmpty || !value.contains('@')) {
+                          return 'Invalid email!';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _authData['email'] = value as String;
+                      },
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'Password'),
+                      obscureText: true,
+                      controller: _passwordController,
+                      validator: (value) {
+                        if (value!.isEmpty || value.length < 5) {
+                          return 'Password is too short!';
+                        }
+                      },
+                      onSaved: (value) {
+                        _authData['password'] = value as String;
+                      },
+                    ),
+                  ],
                 ),
                 if (_authMode == AuthMode.Signup)
                   TextFormField(
                     enabled: _authMode == AuthMode.Signup,
-                    decoration: InputDecoration(labelText: 'Confirm Password'),
+                    decoration: const InputDecoration(labelText: 'Confirm Password'),
                     obscureText: true,
                     validator: _authMode == AuthMode.Signup
                         ? (value) {
@@ -241,23 +236,23 @@ class _AuthCardState extends State<AuthCard> {
                           }
                         : null,
                   ),
-                SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 30,),
                 if (_isLoading)
-                  CircularProgressIndicator()
+                  const CircularProgressIndicator()
                 else
                   ElevatedButton(
                     child:
-                        Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
+                        Text(_authMode == AuthMode.Login ? 'Login' : 'Sign Up',style: const TextStyle(
+                          fontSize: 18,fontWeight: FontWeight.w400,
+                        ),),
                     onPressed: () => _submit(context),
                   ),
                 TextButton(
-                  
-                  child: Text(
-                      '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
                   onPressed: _switchAuthMode,
-                  
+                  child: Text(
+                      '${_authMode == AuthMode.Login ? 'New User? SIGNUP' : 'LOGIN'} ',style: const TextStyle(
+                    fontSize: 15,fontWeight: FontWeight.normal,
+                  ),),
                 ),
               ],
             ),
