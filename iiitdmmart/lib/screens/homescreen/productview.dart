@@ -1,120 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
-
+import 'package:provider/provider.dart';
 import '../../providers/sale_products.dart';
 
-class ProductView extends StatelessWidget {
+class ProductView extends StatefulWidget {
   const ProductView({Key? key}) : super(key: key);
 
   @override
+  State<ProductView> createState() => _ProductViewState();
+}
+
+class _ProductViewState extends State<ProductView> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<SaleProducts>(context,listen: false).fetchAndSetProducts();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    List<SaleProduct> saleProducts = [
-      SaleProduct(
-          id: "1",
-          title: "Calculator",
-          description: "jdwndjwnkdnkwnd",
-          imgsrc:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3KYITeifp3Fhsi3tq1xN_iYNQgxSmmJMiGg&usqp=CAU",
-          keeperId: "xyz@gmail.com",
-          lend: "Buy",
-          ownerId: "abc@gmail.com",
-          price: 599),
-      SaleProduct(
-          id: "2",
-          title: "Kettle",
-          description: "jdwndjwnkdnkwnd",
-          imgsrc:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3KYITeifp3Fhsi3tq1xN_iYNQgxSmmJMiGg&usqp=CAU",
-          keeperId: "xyz@gmail.com",
-          lend: "Buy",
-          ownerId: "abc@gmail.com",
-          price: 999),
-      SaleProduct(
-          id: "1",
-          title: "Calculator",
-          description: "jdwndjwnkdnkwnd",
-          imgsrc:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3KYITeifp3Fhsi3tq1xN_iYNQgxSmmJMiGg&usqp=CAU",
-          keeperId: "xyz@gmail.com",
-          lend: "Buy",
-          ownerId: "abc@gmail.com",
-          price: 99),
-      SaleProduct(
-          id: "1",
-          title: "Calculator2",
-          description: "jdwndjwnkdnkwnd",
-          imgsrc:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3KYITeifp3Fhsi3tq1xN_iYNQgxSmmJMiGg&usqp=CAU",
-          keeperId: "xyz@gmail.com",
-          lend: "Buy",
-          ownerId: "abc@gmail.com",
-          price: 999),
-      SaleProduct(
-          id: "1",
-          title: "Calculator",
-          description: "jdwndjwnkdnkwnd",
-          imgsrc:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3KYITeifp3Fhsi3tq1xN_iYNQgxSmmJMiGg&usqp=CAU",
-          keeperId: "xyz@gmail.com",
-          lend: "Buy",
-          ownerId: "abc@gmail.com",
-          price: 99),
-      SaleProduct(
-          id: "1",
-          title: "Calculator2",
-          description: "jdwndjwnkdnkwnd",
-          imgsrc:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3KYITeifp3Fhsi3tq1xN_iYNQgxSmmJMiGg&usqp=CAU",
-          keeperId: "xyz@gmail.com",
-          lend: "Buy",
-          ownerId: "abc@gmail.com",
-          price: 999),
-      SaleProduct(
-          id: "1",
-          title: "Calculator",
-          description: "jdwndjwnkdnkwnd",
-          imgsrc:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3KYITeifp3Fhsi3tq1xN_iYNQgxSmmJMiGg&usqp=CAU",
-          keeperId: "xyz@gmail.com",
-          lend: "Buy",
-          ownerId: "abc@gmail.com",
-          price: 99),
-      SaleProduct(
-          id: "1",
-          title: "Calculator",
-          description: "jdwndjwnkdnkwnd",
-          imgsrc:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3KYITeifp3Fhsi3tq1xN_iYNQgxSmmJMiGg&usqp=CAU",
-          keeperId: "xyz@gmail.com",
-          lend: "Buy",
-          ownerId: "abc@gmail.com",
-          price: 99),
-      SaleProduct(
-          id: "1",
-          title: "Calculator2",
-          description: "jdwndjwnkdnkwnd",
-          imgsrc:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3KYITeifp3Fhsi3tq1xN_iYNQgxSmmJMiGg&usqp=CAU",
-          keeperId: "xyz@gmail.com",
-          lend: "Buy",
-          ownerId: "abc@gmail.com",
-          price: 999),
-      SaleProduct(
-          id: "1",
-          title: "Calculator2",
-          description: "jdwndjwnkdnkwnd",
-          imgsrc:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3KYITeifp3Fhsi3tq1xN_iYNQgxSmmJMiGg&usqp=CAU",
-          keeperId: "xyz@gmail.com",
-          lend: "Buy",
-          ownerId: "abc@gmail.com",
-          price: 999),
-    ];
+    List<SaleProduct> saleProducts = Provider.of<SaleProducts>(context).saleProducts;
+
+
 
     return GridView.builder(
         gridDelegate:
         const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: 10,
+        itemCount: saleProducts.length,
         itemBuilder: (context, index) {
           return Container(
             padding: const EdgeInsets.all(8),

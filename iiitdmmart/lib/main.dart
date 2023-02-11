@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:iiitdmmart/providers/sale_products.dart';
 import 'package:iiitdmmart/screens/homescreen/homescreen.dart';
 
 import 'package:iiitdmmart/providers/auth.dart';
@@ -22,7 +23,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // var authdata = Provider.of<Auth>(context);
     return MultiProvider(
-        providers: [ChangeNotifierProvider.value(value: Auth())],
+        providers: [
+          ChangeNotifierProvider.value(value: Auth()),
+          ChangeNotifierProxyProvider<Auth, SaleProducts >(create: (context) => SaleProducts('authToken', 'userId', []),
+            update: (context, auth, saleProds) => SaleProducts(auth.token as String
+          , auth.userId,
+          saleProds == null ? [] : saleProds.saleProducts))
+        ],
         child: Consumer<Auth>(
           builder: (ctx, auth, _) => MaterialApp(
             title: 'College',

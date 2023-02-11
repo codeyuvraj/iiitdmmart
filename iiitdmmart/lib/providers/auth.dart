@@ -38,16 +38,22 @@ class Auth with ChangeNotifier {
         Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyDvGrWkxREt5XwLRyI8OTNBljYG00Bbo-A');
         
     try {
+      print('checking http');
+      print('email = $email');
+      print('password: $password');
+      
       final response = await http.post(
         url,
         body: json.encode(
           {
+            
             'email': email,
             'password': password,
             'returnSecureToken': true,
           },
         ),
       );
+      print('http done');
       final responseData = json.decode(response.body);
       print(responseData);
       if (responseData['error'] != null) {

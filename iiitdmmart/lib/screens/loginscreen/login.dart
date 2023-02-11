@@ -122,16 +122,20 @@ class _AuthCardState extends State<AuthCard> {
     try {
       if (_authMode == AuthMode.Login) {
         // Log user in
+        print('login started');
         await Provider.of<Auth>(context, listen: false).login(
           _authData['email'] as String,
           _authData['password'] as String,
         );
+        print('login done');
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(),));
       } else {
         // Sign user up
         await Provider.of<Auth>(context, listen: false).signup(
           _authData['email'] as String,
           _authData['password'] as String,
         );
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(),));
       }
     } on HttpException catch (error) {
       var errorMessage = 'Authentication failed';
@@ -157,7 +161,7 @@ class _AuthCardState extends State<AuthCard> {
       _isLoading = false;
     });
 
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(),));
+    
     //Navigator.pushReplacementNamed(context, "/");
   }
 
