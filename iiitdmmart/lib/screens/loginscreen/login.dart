@@ -43,7 +43,7 @@ class AuthScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 20.0, horizontal: 70.0),
                             child: const Text(
-                              'VenDork',
+                              'Login',
                               style: TextStyle(
                                 // color: Theme.of(context).accentTextTheme.title.color,
                                 fontSize: 50,
