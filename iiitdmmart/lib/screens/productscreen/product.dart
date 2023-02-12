@@ -66,7 +66,7 @@ class Product extends StatelessWidget {
                               10.heightBox,
                               "Description".text.size(14).xl.textStyle(context.captionStyle).start.make(),
                               4.heightBox,
-                              "Diam sagittis in elementum consectetuer odio Conubia aptent quis duis ante.\nPotenti potenti. Dolor eleifend varius, magnis a elementum Porttitor. Ullamcorper metus. \nCursus nonummy platea blandit hendrerit, platea dui et.Phasellus euismod. Vivamus. \nScelerisque luctus potenti torquent nostra Pulvinar non inceptos vitae mauris sed amet per mi posuere curabitur dictumst.".text.textStyle( context.captionStyle).size(15).make().p16(),
+                              item.description.text.textStyle( context.captionStyle).size(15).make().p16(),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

@@ -78,7 +78,7 @@ class SaleProducts with ChangeNotifier {
       extractedData.forEach((prodId, prodData) {
         loadedProducts.add(SaleProduct(
           description: prodData['description'],
-          price: prodData['price'],
+          price: double.parse(prodData['price'].toString()),
           id: prodId,
           title: prodData['title'],
           imgsrc: prodData['imgsrc'],

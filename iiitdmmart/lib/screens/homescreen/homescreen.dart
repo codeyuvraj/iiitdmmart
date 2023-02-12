@@ -25,6 +25,12 @@ class HomeScreen extends StatelessWidget {
           title: "VenDork".text.bold.make(),
         ),
         body: const ProductView(),
+//         ElevatedButton(onPressed: () => {
+//         Provider.of<SaleProducts>(context,listen: false).addSaleProduct(SaleProduct(
+//           id: 'id', title: 'calculator', ownerId: 'ownerId', keeperId: 'iiitdm',
+//            imgsrc:'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+//  price: 20, lend: 'lend', description: 'description'))
+//       }, child: Text('add product(testing)')),
       ),
     );
   }
