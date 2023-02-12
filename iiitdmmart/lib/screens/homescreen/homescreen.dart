@@ -18,11 +18,13 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.black,
           toolbarHeight: 45,
-          leading: IconButton(onPressed: (){},icon: const Icon(Icons.help_outline_sharp)),
+          leading: IconButton(
+              onPressed: () {}, icon: const Icon(Icons.help_outline_sharp)),
           actions: [
-            IconButton(onPressed: (){}, icon: const Icon(Icons.search_rounded)),
+            IconButton(
+                onPressed: () {}, icon: const Icon(Icons.search_rounded)),
           ],
-          title: "VenDork".text.bold.make(),
+          title: "College Share".text.bold.make(),
         ),
         body: const ProductView(),
 //         ElevatedButton(onPressed: () => {

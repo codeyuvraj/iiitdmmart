@@ -53,7 +53,7 @@ class AuthScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                              height: 100,
+                              height: 350,
                               child: Lottie.asset('assets/lock.json',
                                   fit: BoxFit.fill)),
                         ],
